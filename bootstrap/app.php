@@ -112,4 +112,8 @@ $app->router->group([
     require __DIR__.'/../routes/web.php';
 });
 
+/* I added this for php artisan commands*/
+$app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+
+
 return $app;
