@@ -15,11 +15,11 @@ class UsersDetailsTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->mediumIncrements('id');
-            $table->string('email_ID')->unique()->notNullable() ;
+            $table->string('email')->unique()->notNullable() ;
             $table->string('password');
 
-            $table->string('first name');
-            $table->string('last name');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->timestamps();
         });
         
@@ -32,6 +32,6 @@ class UsersDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(users);
+        Schema::dropIfExists('users');
     }
 }

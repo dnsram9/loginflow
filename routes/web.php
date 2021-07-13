@@ -17,3 +17,10 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
     //echo "Hook is working";
 });
+
+$router->group(['prefix' => 'api'], function() use($router)
+{
+    $router->post('/register','UserController@register');
+});
+
+
