@@ -15,7 +15,7 @@ class UsersDetailsTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->mediumIncrements('id');
-            $table->string('email_ID');
+            $table->string('email_ID')->unique()->notNullable() ;
             $table->string('password');
 
             $table->string('first name');
