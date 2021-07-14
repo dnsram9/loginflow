@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -26,9 +25,9 @@ class UserController extends Controller
         // To validate
         $this->validate($request, [
             'first_name' => 'required|string',
-            'last_name' => 'required|string',
+            'last_name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string'
+            'password' => 'required'
         ]);
 
         $input = $request->only('first_name', 'last_name', 'email', 'password');
@@ -48,10 +47,10 @@ class UserController extends Controller
 
             if($user->save())
             {
-                $code = 201;
+                $code = 200;
                 $output = [
                     'user' => $user,
-                    'code' => $code,
+                    'code' => 200,
                     'message' => 'Registration is successfully done'
                 ];
             }
@@ -71,7 +70,7 @@ class UserController extends Controller
             //dd($e->getMessage()); 
             $code = 500;
             $output = [
-                'code' => $code,
+                'code' => 500,
                 'message' => 'Oops!!!'
             ];
 
@@ -80,42 +79,4 @@ class UserController extends Controller
         return response()->json($output, $code);
     }
     
-
-    public function login(Request $request)
-    {
-        // To validate
-        // What if validation is wrong ? 
-        // string|min:8
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|string'
-        ]);
-    
-
-        $input = $request->only('email', 'password');
-        //Check email exists or not in database ?
-
-        if(! $authorized = Auth::attempt($input))
-        {
-                $code = 401;
-                $output = [
-                    'code' => $code,
-                    'message' => 'Your password is incorrect'
-                ];
-        }
-        else
-        {
-            $token = $this->respondWithToken($authorized);
-            $code = 302;
-                $output = [
-                    'code' => $code,
-                    'message' => 'Logged in successfully',
-                    'token' => $token
-                ];
-        }
-
-        return response()->json($output, $code);
-    }    
-
-
 }
