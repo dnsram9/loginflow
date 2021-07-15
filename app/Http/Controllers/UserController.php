@@ -15,14 +15,11 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        //
+    
     }
 
     public function register(Request $request)
     {
-        //dd($request);
-
-
         // To validate
         $this->validate($request, [
             'first_name' => 'required|string',
@@ -44,6 +41,7 @@ class UserController extends Controller
 
             $password = $input['password'];
             $user->password = app('hash')->make($password);
+            $user->role = 0;
 
 
             if($user->save())
@@ -86,6 +84,8 @@ class UserController extends Controller
         // To validate
         // What if validation is wrong ? 
         // string|min:8
+        // Password should have Alpha numericals 
+
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required|string'
@@ -93,7 +93,8 @@ class UserController extends Controller
     
 
         $input = $request->only('email', 'password');
-        //Check email exists or not in database ?
+
+        //Check email exists or not in database 
 
         if(! $authorized = Auth::attempt($input))
         {
@@ -115,7 +116,14 @@ class UserController extends Controller
         }
 
         return response()->json($output, $code);
-    }    
+    }  
+    
+    public function show()
+    {
+        $results = app('db')->select("SELECT * FROM users");
+
+        return $results;
+    }
 
 
 }

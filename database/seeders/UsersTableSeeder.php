@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
                 'last_name' => 'test_last1',
                 'email' => 'testuser1@gmail.com',
                 'password' => 'test123'
-            ]);*/
+            ]);*/ 
         
             app('db')
             ->table('users')
