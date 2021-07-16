@@ -52,6 +52,8 @@ class UserController extends Controller
                     'code' => $code,
                     'message' => 'Registration is successfully done'
                 ];
+                //Send a Welcome email to the registered mail.
+
             }
             else
             {
@@ -119,9 +121,19 @@ class UserController extends Controller
     
     public function show()
     {
-        $results = app('db')->select("SELECT * FROM users");
+        //$results = app('db')->select("SELECT * FROM users");
+        //return $results;
 
-        return $results;
+        $user = auth()->user();
+        if($user->role)
+        {
+            $users = User::select('first_name','email','role')->get();
+        }
+        else
+        {
+            $users = User::select('first_name','email')->where('id',$user->id)->get();
+        }
+        return response()->json($users,200);
     }
 
 
