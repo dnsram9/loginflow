@@ -66,7 +66,6 @@ class UserController extends Controller
         } 
         catch (Exception $e) 
         {
-            //dd($e->getMessage()); 
             $code = 500;
             $output = [
                 'code' => $code,
@@ -107,7 +106,7 @@ class UserController extends Controller
         else
         {
             $token = $this->respondWithToken($authorized);
-            $code = 302;
+            $code = 200;
                 $output = [
                     'code' => $code,
                     'message' => 'Logged in successfully',

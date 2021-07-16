@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;                              //Other one that I should include ?
+use Illuminate\Database\Eloquent\Model;                              
 
 //jwt-auth
 use Tymon\JWTAuth\Contracts\JWTSubject;
