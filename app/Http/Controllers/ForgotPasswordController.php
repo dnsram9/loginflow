@@ -42,7 +42,6 @@ class ForgotPasswordController extends Controller
             $token = auth()->tokenById($temp);  
 
             //Saving into forgot password database
-
             $forgot = new ForgotPasswordModel;
             $forgot->user_id = $user->id;   
             $forgot->token = $token;
