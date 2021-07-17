@@ -83,8 +83,6 @@ class UserController extends Controller
     public function login(Request $request)
     {
         // To validate
-        // What if validation is wrong ? 
-        // string|min:8
         // Password should have Alpha numericals 
 
         $this->validate($request, [
