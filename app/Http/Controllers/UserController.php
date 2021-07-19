@@ -94,6 +94,17 @@ class UserController extends Controller
         $input = $request->only('email', 'password');
 
         //Check email exists or not in database 
+        $user = User::where('email',$input['email'])->first();
+
+        if(empty($user))
+        {
+            $code = 404;
+            $output = [
+                'code' => $code,
+                'message' => 'Account with this email address is not found. Register now ?'
+            ];
+            return response()->json($output, $code);
+        }
 
         if(! $authorized = Auth::attempt($input))
         {

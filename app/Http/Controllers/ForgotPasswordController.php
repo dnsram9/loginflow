@@ -30,7 +30,7 @@ class ForgotPasswordController extends Controller
                 'code' => $code,
                 'message' => 'Email not found'
             ];
-            return respose()->json($output, $code);
+            return response()->json($output, $code);
         }
 
         //Check if email exists in forgotpassword table already, then send that token
@@ -74,12 +74,12 @@ class ForgotPasswordController extends Controller
         //Get the user_id
         //$user = User::where('email',$input['email'])->first();
 
-        $forgot = ForgotPasswordModel::join('users','forgotpassword.user_id','=','users.id')->where('token',$input['token_rec'])->first();
+        $forgot = ForgotPasswordModel::join('users','forgotpassword.user_id','=','users.id')->where('token',$input['token_rec'])->where('active_status',1)->first();
         //dd($forgot->user_id);
         // Verify token
         if(empty($forgot))
         {
-            return response()->json(['message'=>'Token is incorrect'],401);  
+            return response()->json(['message'=>'Token has been revoked'],401);  
         }
         else
         {
