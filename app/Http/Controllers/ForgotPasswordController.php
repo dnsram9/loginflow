@@ -71,6 +71,8 @@ class ForgotPasswordController extends Controller
 
         $input = $request->only(/*'email',*/'token_rec','newpassword');
 
+        //Confirm the new password ?
+
         //Get the user_id
         //$user = User::where('email',$input['email'])->first();
 
