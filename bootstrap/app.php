@@ -64,7 +64,7 @@ $app->configure('app');
 
 $app->configure('auth');
 $app->configure('mail');
-
+$app->configure('cors');
 
 /*
 |--------------------------------------------------------------------------
@@ -102,8 +102,7 @@ $app->register(App\Providers\AuthServiceProvider::class);   //Uncommented for JW
 // $app->register(App\Providers\EventServiceProvider::class);
 
 $app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
-
-
+$app->register(Fruitcake\Cors\CorsServiceProvider::class);
 
 
 $app->register(Illuminate\Notifications\NotificationServiceProvider::class);
