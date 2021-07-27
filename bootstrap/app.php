@@ -77,9 +77,9 @@ $app->configure('cors');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    Fruitcake\Cors\HandleCors::class,
+]);
 
 //Below uncommented for jwt-auth
 $app->routeMiddleware([
