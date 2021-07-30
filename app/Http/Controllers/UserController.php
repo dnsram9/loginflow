@@ -133,6 +133,7 @@ class UserController extends Controller
         //$results = app('db')->select("SELECT * FROM users");
         //return $results;
 
+
         $user = auth()->user();
         if($user->role)
         {
@@ -145,5 +146,10 @@ class UserController extends Controller
         return response()->json($users,200);
     }
 
-
+    public function details()
+    {
+        $user = auth()->user();
+        $users = User::select('first_name','email')->where('id',$user->id)->first();
+        return response()->json($users,200);
+    }
 }

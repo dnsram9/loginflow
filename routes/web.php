@@ -25,6 +25,7 @@ $router->group(['prefix' => 'api'], function() use($router)
     //$router->get('/show','UserController@show');
     $router->post('/forgotpassword','ForgotPasswordController@forgotpassword');
     $router->post('/resetpassword','ForgotPasswordController@resetverify');
+    $router->get('/details','UserController@details');
 });
 
 $router->group(['prefix' => 'api','middleware' => 'auth'], function() use($router)
